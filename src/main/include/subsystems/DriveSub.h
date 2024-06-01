@@ -5,18 +5,23 @@
 #pragma once
 
 #include <frc2/command/SubsystemBase.h>
+#include <frc/motorcontrol/Victor.h>
+#include "Constants.h"
 
 class DriveSub : public frc2::SubsystemBase 
 {
  public:
   DriveSub();
-
-  /**
-   * Will be called periodically whenever the CommandScheduler runs.
-   */
   void Periodic() override;
 
+  void Init();
+
+  void TankDrive(double left, double right);
+  void RCDrive(double vertical, double horizontal);
+
  private:
-  // Components (e.g. motor controllers and sensors) should generally be
-  // declared private and exposed only through public methods.
+  frc::Victor m_leftMotorOne{DriveTrain::kLeftMotorOne_PWM};
+  frc::Victor m_leftMotorTwo{DriveTrain::kLeftMotorTwo_PWM};
+  frc::Victor m_rightMotorOne{DriveTrain::kRightMotorOne_PWM};
+  frc::Victor m_rightMotorTwo{DriveTrain::kRightMotorTwo_PWM};
 };

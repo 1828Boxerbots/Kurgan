@@ -16,25 +16,27 @@
 
 namespace DriveTrain
 {
-    inline constexpr int kLeftMotorOne = 2; //PWM
-    inline constexpr int kLeftMotorTwo = 1; //PWM
-    inline constexpr int kRightMotorOne = 3; //PWM
-    inline constexpr int kRightMotorTwo = 4; //PWM
-
-
-constexpr int PWM_LOADER_KURGAN         = 0;
-constexpr int DIO_PHOTOGATE_KURGAN      = 0;
+    inline constexpr int kLeftMotorOne_PWM = 2;
+    inline constexpr int kLeftMotorTwo_PWM = 1;
+    inline constexpr int kRightMotorOne_PWM = 3;
+    inline constexpr int kRightMotorTwo_PWM = 4;
 }
 
 namespace Shooter
 {
-    inline constexpr int kLeftMotorOne_PWM = 6; //PWM
-    inline constexpr int kLeftMotorTwo_PWM = 7; //PWM
-    inline constexpr int kRightMotorOne = 5; //PWM
-    inline constexpr int kRightMotorTwo = 8 ;//PWM
+    inline constexpr int kLeftMotorOne_PWM = 6;
+    inline constexpr int kLeftMotorTwo_PWM = 7;
+    inline constexpr int kRightMotorOne_PWM = 5;
+    inline constexpr int kRightMotorTwo_PWM = 8 ;
 }
 
 namespace Loader
 {
+    inline constexpr int kLoader_PWM = 0;
+    inline constexpr int kPhotogate_DIO = 0;
+}
 
+namespace XboxControl
+{
+    inline constexpr int kPort = 0;
 }

@@ -6,5 +6,28 @@
 
 DriveSub::DriveSub() = default;
 
-// This method will be called once per scheduler run
 void DriveSub::Periodic() {}
+
+void DriveSub::Init()
+{
+    m_rightMotorOne.SetInverted(true);
+    m_rightMotorTwo.SetInverted(true);
+}
+
+void DriveSub::TankDrive(double left, double right)
+{
+    //Left:
+    m_leftMotorOne.Set(left);
+    m_leftMotorTwo.Set(left);
+
+    //Right:
+    m_rightMotorOne.Set(right);
+    m_rightMotorTwo.Set(right);
+}
+
+void DriveSub::RCDrive(double vertical, double horizontal)
+{
+    TankDrive(vertical+horizontal, vertical-horizontal);
+}
+
+
