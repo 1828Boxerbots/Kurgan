@@ -3,6 +3,7 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 
 #include "Constants.hpp"
+#include "Subsystems/DemoMode.hpp"
 
 namespace Kurgan
 {
@@ -63,7 +64,7 @@ namespace Kurgan
         //                      END SAFETY CRITICAL CODE
         // ================================================================
 
-        frc::SmartDashboard::PutString("MotorTempHeader", "Drive Motor Temp Readouts (20 ms):");
+        frc::SmartDashboard::PutString("DriveMotorTempHeader", "Drive Motor Temp Readouts (20 ms):");
         frc::SmartDashboard::PutNumber("Drive0 Temp(C)", drive0Temp);
         frc::SmartDashboard::PutNumber("Drive1 Temp(C)", drive1Temp);
         frc::SmartDashboard::PutNumber("Drive2 Temp(C)", drive2Temp);
@@ -78,10 +79,18 @@ namespace Kurgan
         // ================================================================
         if (m_SafetyDisabled)
         {
-            m_DriveMotor0.Set(ctre::phoenix::motorcontrol::VictorSPXControlMode::PercentOutput, left);
-            
-            const float scaleFactor = 0.8;
-            m_DriveMotor2.Set(ctre::phoenix::motorcontrol::VictorSPXControlMode::PercentOutput, right * scaleFactor);
+            if (DemoMode::GetDemoMode())
+            {
+                m_DriveMotor0.Set(ctre::phoenix::motorcontrol::VictorSPXControlMode::PercentOutput, left * DRIVE_REDUCTION);
+                m_DriveMotor2.Set(ctre::phoenix::motorcontrol::VictorSPXControlMode::PercentOutput, right * DRIVE_REDUCTION);
+            }
+            else
+            {
+                m_DriveMotor0.Set(ctre::phoenix::motorcontrol::VictorSPXControlMode::PercentOutput, left);
+
+                const float scaleFactor = 0.8;
+                m_DriveMotor2.Set(ctre::phoenix::motorcontrol::VictorSPXControlMode::PercentOutput, right * scaleFactor);
+            }
         }
         // ================================================================
         //                      END SAFETY CRITICAL CODE

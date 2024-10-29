@@ -33,7 +33,7 @@ namespace Kurgan
             ctre::phoenix::motorcontrol::can::VictorSPX m_Motor { (int)PortManager::Instance().GetCanID("LoaderMotor") };
 
             // DIO(s)
-            static frc::DigitalInput m_PhotoGate;
+            static frc::DigitalInput s_PhotoGate;
 
             // ================================================================
             //                      BEGIN SAFETY CRITICAL CODE

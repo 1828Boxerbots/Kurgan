@@ -3,11 +3,12 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 
 #include "Constants.hpp"
+#include "Subsystems/DemoMode.hpp"
 
 namespace Kurgan
 {
     // Define statics
-    frc::DigitalInput LoaderSubsystem::m_PhotoGate = frc::DigitalInput((int)PortManager::Instance().GetDIOPort("LoaderPhotogate"));
+    frc::DigitalInput LoaderSubsystem::s_PhotoGate = frc::DigitalInput((int)PortManager::Instance().GetDIOPort("LoaderPhotogate"));
 
     LoaderSubsystem::LoaderSubsystem()
     {
@@ -55,7 +56,7 @@ namespace Kurgan
         //                      END SAFETY CRITICAL CODE
         // ================================================================
 
-        frc::SmartDashboard::PutString("LoaderTempHeader", "Loader Motor Temp Readouts (20 ms):");
+        frc::SmartDashboard::PutString("LoaderMotorTempHeader", "Loader Motor Temp Readouts (20 ms):");
         frc::SmartDashboard::PutNumber("Loader Temp(C)", motorTemp);
         frc::SmartDashboard::PutBoolean("Loader Safety Engaged", !m_SafetyDisabled);
     }
@@ -67,7 +68,14 @@ namespace Kurgan
         // ================================================================
         if (m_SafetyDisabled)
         {
-            m_Motor.Set(ctre::phoenix::motorcontrol::VictorSPXControlMode::PercentOutput, speed);
+            if (DemoMode::GetDemoMode())
+            {
+                m_Motor.Set(ctre::phoenix::motorcontrol::VictorSPXControlMode::PercentOutput, speed * LOADER_REDUCTION);
+            }
+            else
+            {
+                m_Motor.Set(ctre::phoenix::motorcontrol::VictorSPXControlMode::PercentOutput, speed);
+            }
         }
         // ================================================================
         //                      END SAFETY CRITICAL CODE
@@ -76,6 +84,6 @@ namespace Kurgan
 
     bool LoaderSubsystem::GetPhotoGateState()
     {
-        return m_PhotoGate.Get();
+        return s_PhotoGate.Get();
     }
 }
