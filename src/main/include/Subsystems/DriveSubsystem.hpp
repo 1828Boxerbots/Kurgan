@@ -34,5 +34,13 @@ namespace Kurgan
             // Right Drive Train
             ctre::phoenix::motorcontrol::can::VictorSPX m_DriveMotor2 { (int)PortManager::Instance().GetCanID("DriveMotor2") };
             ctre::phoenix::motorcontrol::can::VictorSPX m_DriveMotor3 { (int)PortManager::Instance().GetCanID("DriveMotor3") };
+
+            // ================================================================
+            //                      BEGIN SAFETY CRITICAL CODE
+            // ================================================================
+            bool m_SafetyDisabled = true;
+            // ================================================================
+            //                       END SAFETY CRITICAL CODE
+            // ================================================================
     };
 }
