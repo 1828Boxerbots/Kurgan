@@ -20,6 +20,8 @@ namespace Kurgan
 
         unsigned int GetDIOPort(std::string port) { return m_DIOPorts[port]; }
 
+        unsigned int GetUSBPort(std::string port) { return m_USBPorts[port]; }
+
     protected:
     private:
         PortManager();
@@ -39,6 +41,10 @@ namespace Kurgan
         std::map<std::string, unsigned int> m_DIOPorts {
             {"LoaderPhotogate", 1},
             {"DemoModeSwitch", 0}
+        };
+
+        std::map<std::string, unsigned int> m_USBPorts {
+            {"DriveController", 0}
         };
     };
 }
