@@ -31,6 +31,7 @@ void RobotContainer::ConfigureBindings() {
   // Loader Commands
   m_DriveController.B().ToggleOnTrue(Kurgan::LoadCmd(0.8, &m_Loader).ToPtr());
   (m_DriveController.LeftBumper() && m_DriveController.B()).WhileTrue(Kurgan::SpitOutCmd(0.8, &m_Loader).ToPtr());
+  m_DriveController.Y().WhileTrue(Kurgan::LoadCmd(0.8, &m_Loader, true).ToPtr());
 
   // Shooter Commands
   m_DriveController.RightTrigger().WhileTrue(Kurgan::ShootCmd(1.0, &m_Shooter).ToPtr());

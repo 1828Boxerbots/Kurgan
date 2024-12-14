@@ -3,8 +3,8 @@
 namespace Kurgan
 {
     // Demo Mode Reduction factors (NOTE: 1.0 means no reduction, and 0.8 would be a 20% reduction)
-    inline constexpr float DRIVE_REDUCTION = 0.5;
-    inline constexpr float SHOOTER_REDUCTION = 0.5;
+    inline constexpr float DRIVE_REDUCTION = 0.6;
+    inline constexpr float SHOOTER_REDUCTION = 0.4;
     inline constexpr float LOADER_REDUCTION = 1.0;
 
     // ========================================================================

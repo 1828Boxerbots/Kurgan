@@ -2,10 +2,11 @@
 
 namespace Kurgan
 {
-    LoadCmd::LoadCmd(float speed, LoaderSubsystem* pLoaderSub)
+    LoadCmd::LoadCmd(float speed, LoaderSubsystem* pLoaderSub, bool overridePhotoGate)
     {
         m_pLoaderSub = pLoaderSub;
         m_Speed = speed;
+        m_Override = overridePhotoGate;
 
         AddRequirements(m_pLoaderSub);
     }
@@ -22,12 +23,19 @@ namespace Kurgan
 
     void LoadCmd::Execute()
     {
-        if (m_pLoaderSub->GetPhotoGateState())
+        if (m_Override)
         {
-            m_IsFinished = true;
+            m_pLoaderSub->Load(m_Speed);
         }
-
-        m_pLoaderSub->Load(m_Speed);
+        else
+        {
+            if (m_pLoaderSub->GetPhotoGateState())
+            {
+                m_IsFinished = true;
+            }
+    
+            m_pLoaderSub->Load(m_Speed);
+        }
     }
 
     void LoadCmd::End(bool interrupted)

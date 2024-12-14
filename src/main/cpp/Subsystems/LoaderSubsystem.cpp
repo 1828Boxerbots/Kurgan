@@ -29,36 +29,36 @@ namespace Kurgan
 
     void LoaderSubsystem::Periodic()
     {  
-        double motorTemp = m_Motor.GetTemperature();
+        // double motorTemp = m_Motor.GetTemperature();
 
-        // ================================================================
-        //                      BEGIN SAFETY CRITICAL CODE
-        // ================================================================
-        // Safety off
-        if (m_SafetyDisabled)
-        {
-            if (motorTemp > MOTOR_CUTOFF_TEMP)
-            {
-                m_SafetyDisabled = false;
-            }
-        }
-        // Safety on
-        else
-        {
-            const double disengageThreshold = MOTOR_CUTOFF_TEMP - 5;
+        // // ================================================================
+        // //                      BEGIN SAFETY CRITICAL CODE
+        // // ================================================================
+        // // Safety off
+        // if (m_SafetyDisabled)
+        // {
+        //     if (motorTemp > MOTOR_CUTOFF_TEMP)
+        //     {
+        //         m_SafetyDisabled = false;
+        //     }
+        // }
+        // // Safety on
+        // else
+        // {
+        //     const double disengageThreshold = MOTOR_CUTOFF_TEMP - 5;
 
-            if (motorTemp <= disengageThreshold)
-            {
-                m_SafetyDisabled = true;
-            }
-        }
-        // ================================================================
-        //                      END SAFETY CRITICAL CODE
-        // ================================================================
+        //     if (motorTemp <= disengageThreshold)
+        //     {
+        //         m_SafetyDisabled = true;
+        //     }
+        // }
+        // // ================================================================
+        // //                      END SAFETY CRITICAL CODE
+        // // ================================================================
 
-        frc::SmartDashboard::PutString("LoaderMotorTempHeader", "Loader Motor Temp Readouts (20 ms):");
-        frc::SmartDashboard::PutNumber("Loader Temp(C)", motorTemp);
-        frc::SmartDashboard::PutBoolean("Loader Safety Engaged", !m_SafetyDisabled);
+        // frc::SmartDashboard::PutString("LoaderMotorTempHeader", "Loader Motor Temp Readouts (20 ms):");
+        // frc::SmartDashboard::PutNumber("Loader Temp(C)", motorTemp);
+        // frc::SmartDashboard::PutBoolean("Loader Safety Engaged", !m_SafetyDisabled);
     }
 
     void LoaderSubsystem::Load(float speed)

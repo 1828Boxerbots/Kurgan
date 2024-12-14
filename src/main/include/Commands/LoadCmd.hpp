@@ -10,7 +10,7 @@ namespace Kurgan
     class LoadCmd : public frc2::CommandHelper<frc2::Command, LoadCmd>
     {
     public:
-        LoadCmd(float speed, LoaderSubsystem* pLoaderSub);
+        LoadCmd(float speed, LoaderSubsystem* pLoaderSub, bool override = false);
         ~LoadCmd();
 
         void Initialize() override;
@@ -22,6 +22,7 @@ namespace Kurgan
     private:
         LoaderSubsystem* m_pLoaderSub;
         float m_Speed;
+        bool m_Override;
 
         bool m_IsFinished = false;
     };
